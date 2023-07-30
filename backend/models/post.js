@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
   author: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  postContent: { type: String, required: true },
+  postContent: { type: String, required: true, min: 3 },
   timestamp: { type: Date, required: true, default: Date.now },
   likedBy: [{ type: Schema.Types.ObjectId, ref: "User" }],
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],

@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const Admin = require("../models/user");
+const User = require("../models/user");
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const JwtStrategy = require("passport-jwt").Strategy;
 
@@ -23,9 +23,9 @@ module.exports = (passport) => {
 
       // We will assign the `sub` property on the JWT to the database ID of user
       try {
-        const admin = await Admin.findOne({ _id: jwt_payload.sub });
-        if (admin) {
-          return done(null, admin);
+        const user = await User.findOne({ _id: jwt_payload.sub });
+        if (user) {
+          return done(null, user);
         } else {
           return done(null, false);
         }

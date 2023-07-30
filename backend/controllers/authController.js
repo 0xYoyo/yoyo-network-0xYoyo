@@ -7,29 +7,7 @@ const { issueJWT } = require("../utils/issueJWT");
 const { validatePassword } = require("../utils/validatePassword");
 
 // Handle register.
-exports.register_post = asyncHandler(async (req, res, next) => {
-  bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
-    if (err) return next(err);
-
-    const user = new User({
-      displayName: req.body.displayName,
-      username: req.body.username,
-      password: hashedPassword,
-    });
-
-    const newUser = await user.save();
-    const jwt = issueJWT(newUser);
-    res.json({
-      success: true,
-      user: newUser,
-      token: jwt.token,
-      expiresIn: jwt.expires,
-    });
-  });
-});
-
-// Handle login.
-exports.login_post = [
+exports.register_post = [
   body("displayName")
     .trim()
     .isLength({ min: 1 })
@@ -44,7 +22,7 @@ exports.login_post = [
     .trim()
     .isLength({ min: 1 })
     .escape()
-    .withMessage("password must be longer than 4 characters."),
+    .withMessage("password must be longer than 1 characters."),
 
   asyncHandler(async (req, res, next) => {
     // Extract errors
@@ -53,6 +31,52 @@ exports.login_post = [
       // Rerender with value and errors
       res.json({
         displayName: req.body.displayName,
+        username: req.body.username,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+        if (err) return next(err);
+
+        const user = new User({
+          displayName: req.body.displayName,
+          username: req.body.username,
+          password: hashedPassword,
+        });
+
+        const newUser = await user.save();
+        const jwt = issueJWT(newUser);
+        res.json({
+          success: true,
+          user: newUser,
+          token: jwt.token,
+          expiresIn: jwt.expires,
+        });
+      });
+    }
+  }),
+];
+
+// Handle login.
+exports.login_post = [
+  body("username")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("username must be specified."),
+  body("password")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("password must be longer than 1 characters."),
+
+  asyncHandler(async (req, res, next) => {
+    // Extract errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      // Rerender with value and errors
+      res.json({
         username: req.body.username,
         errors: errors.array(),
       });

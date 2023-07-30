@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 var indexRouter = require("./routes/index");
-// const apiRouter = require("./routes/api");
+const apiRouter = require("./routes/api");
 
 var app = express();
 
@@ -37,6 +37,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/", indexRouter);
-// app.use("/api", apiRouter);
+app.use("/api", apiRouter);
 
 module.exports = app;

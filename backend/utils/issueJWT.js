@@ -6,7 +6,7 @@ const privateKey = process.env.PRIVATE_KEY;
 const issueJWT = (user) => {
   const _id = user._id;
 
-  const expiresIn = "1 d";
+  const expiresIn = "3 w";
 
   const payload = {
     sub: _id,

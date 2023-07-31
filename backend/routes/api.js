@@ -32,9 +32,9 @@ router.delete(
   post_controller.post_delete
 );
 
-// PUT request to change post liked status. ***TODO***
-router.post(
-  "/post/:id",
+// PUT request to change post liked status.
+router.put(
+  "/post/:id/like",
   passport.authenticate("jwt", { session: false }),
   post_controller.post_like
 );
@@ -46,13 +46,13 @@ router.get(
   post_controller.post_detail
 ); // Also has comment list
 
-/// COMMENT ROUTES /// ***TODO***
+/// COMMENT ROUTES ///
 
 // POST request for creating comment under a post.
 router.post(
   "/post/:id/comment/",
   passport.authenticate("jwt", { session: false }),
-  comment_controller.comment_create_post
+  comment_controller.comment_create
 );
 
 // DELETE request for deleting comment.

@@ -25,7 +25,7 @@ exports.post_detail = asyncHandler(async (req, res, next) => {
 exports.post_create = [
   body("postContent")
     .trim()
-    .isLength({ min: 3 })
+    .isLength({ min: 1 })
     .escape()
     .withMessage("Content must be specified"),
   asyncHandler(async (req, res, next) => {
@@ -59,18 +59,43 @@ exports.post_create = [
 
 // Handle post delete on DELETE.
 exports.post_delete = asyncHandler(async (req, res, next) => {
-  const updatedUser = await User.findOneAndUpdate(
-    { _id: req.user._id },
-    { $pull: { posts: req.params.id } },
-    { new: true }
-  );
-  const deletedPost = await Post.findByIdAndDelete(req.params.id);
-  res.json([deletedPost, updatedUser]);
+  const post = await Post.findById(req.params.id);
+  if (!post) {
+    res.status(404).json({ success: false, msg: "post not found" });
+  }
+  if (post.author.valueOf() === req.user._id.valueOf()) {
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.user._id },
+      { $pull: { posts: req.params.id } },
+      { new: true }
+    );
+    const deletedPost = await Post.findByIdAndDelete(req.params.id);
+    res.json([deletedPost, updatedUser]);
+  } else {
+    console.log(post.author.valueOf());
+    console.log(req.user._id.valueOf());
+    res.status(403).json({ success: false, msg: "you are not the author" });
+  }
 });
 
-// Handle post like on POST/PUT
+// Handle post like on PUT
 exports.post_like = asyncHandler(async (req, res, next) => {
-  res.json("NOT IMPLEMENTED - post_like");
+  const isLiked = await Post.find({ likedBy: req.user._id });
+  if (isLiked && isLiked.length) {
+    const updatedPost = await Post.findOneAndUpdate(
+      { _id: req.params.id },
+      { $pull: { likedBy: req.user._id } },
+      { new: true }
+    );
+    res.json(updatedPost);
+  } else {
+    const updatedPost = await Post.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: { likedBy: req.user._id } },
+      { new: true }
+    );
+    res.json(updatedPost);
+  }
 });
 
 /// OPTIONAL ///

@@ -62,27 +62,55 @@ router.delete(
   comment_controller.comment_delete
 );
 
-/// USER ROUTES /// ***TODO***
+/// USER ROUTES ///
 
-// GET request for exploring users.
+// GET request for getting logged in user profile.
 router.get(
-  "/users",
+  "/profile",
   passport.authenticate("jwt", { session: false }),
-  user_controller.user_list_get
+  user_controller.user_my_profile
 );
 
-// PUT request to edit user profile details.
-router.put(
-  "/user/:id",
+// GET request for exploring non-followed users.
+router.get(
+  "/profile/explore",
   passport.authenticate("jwt", { session: false }),
-  user_controller.user_edit_put
+  user_controller.user_list
 );
 
 // GET request for getting certain user information.
 router.get(
-  "/user/:id",
+  "/profile/:id",
   passport.authenticate("jwt", { session: false }),
-  user_controller.user_detail_get
+  user_controller.user_detail
+);
+
+// PUT request to edit user profile details. ***TODO***
+router.put(
+  "/profile/:id",
+  passport.authenticate("jwt", { session: false }),
+  user_controller.user_edit
+);
+
+// GET request for getting certain user followers.
+router.get(
+  "/profile/:id/followers",
+  passport.authenticate("jwt", { session: false }),
+  user_controller.user_followers
+);
+
+// GET request for getting certain user following.
+router.get(
+  "/profile/:id/following",
+  passport.authenticate("jwt", { session: false }),
+  user_controller.user_following
+);
+
+// PUT request for changing following status.
+router.put(
+  "/profile/:id/follow",
+  passport.authenticate("jwt", { session: false }),
+  user_controller.user_follow
 );
 
 /// AUTHENTICATION ROUTES ///

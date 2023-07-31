@@ -59,8 +59,13 @@ exports.post_create = [
 
 // Handle post delete on DELETE.
 exports.post_delete = asyncHandler(async (req, res, next) => {
+  const updatedUser = await User.findOneAndUpdate(
+    { _id: req.user._id },
+    { $pull: { posts: req.params.id } },
+    { new: true }
+  );
   const deletedPost = await Post.findByIdAndDelete(req.params.id);
-  res.json(deletedPost);
+  res.json([deletedPost, updatedUser]);
 });
 
 // Handle post like on POST/PUT

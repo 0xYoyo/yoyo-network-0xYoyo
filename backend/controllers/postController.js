@@ -3,9 +3,12 @@ const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
-// *** TODO ***
 exports.index = asyncHandler(async (req, res, next) => {
-  const latestPosts = await Post.find().sort({ timestamp: -1 }).limit(10);
+  const latestPosts = await Post.find({
+    $or: [{ author: { $in: req.user.following } }, { author: req.user._id }],
+  })
+    .sort({ timestamp: -1 })
+    .limit(10);
   res.json(latestPosts);
 });
 

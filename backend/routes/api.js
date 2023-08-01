@@ -85,7 +85,7 @@ router.get(
   user_controller.user_detail
 );
 
-// PUT request to edit user profile details. ***TODO***
+// PUT request to edit user profile details.
 router.put(
   "/profile/:id",
   passport.authenticate("jwt", { session: false }),

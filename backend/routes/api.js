@@ -132,6 +132,3 @@ module.exports = router;
 //   passport.authenticate("jwt", { session: false }),
 //   post_controller.post_edit
 // );
-
-// GET request for list of all published posts by a certain user.
-// router.get("/posts", post_controller.post_list);

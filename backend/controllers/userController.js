@@ -29,15 +29,15 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
 exports.user_edit = [
   body("displayName")
     .trim()
-    .isLength({ min: 1 })
+    .isLength({ min: 1, max: 50 })
     .escape()
-    .withMessage("Display name must be specified"),
+    .withMessage("Display name must be between 1 and 50 characters."),
   body("bio")
     .optional({ values: "falsy" })
     .trim()
-    .isLength({ min: 1, max: 100 })
+    .isLength({ min: 1, max: 200 })
     .escape()
-    .withMessage("Bio must be between 1 and 100 characters"),
+    .withMessage("Bio must be between 1 and 200 characters."),
 
   asyncHandler(async (req, res, next) => {
     // Extract errors

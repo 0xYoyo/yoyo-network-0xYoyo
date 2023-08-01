@@ -29,9 +29,9 @@ exports.post_detail = asyncHandler(async (req, res, next) => {
 exports.post_create = [
   body("postContent")
     .trim()
-    .isLength({ min: 1 })
+    .isLength({ min: 1, max: 250 })
     .escape()
-    .withMessage("Content must be specified"),
+    .withMessage("Content must be between 1 and 250 characters."),
   asyncHandler(async (req, res, next) => {
     // Extract errors
     const errors = validationResult(req);
@@ -115,10 +115,4 @@ exports.post_like = asyncHandler(async (req, res, next) => {
 //   });
 //   changedPost = await Post.findByIdAndUpdate(req.params.id, newPost, {});
 //   res.json(changedPost);
-// });
-
-// Display list of all posts.
-// exports.post_list = asyncHandler(async (req, res, next) => {
-//   const allPosts = await Post.find().sort({ timestamp: -1 });
-//   res.json(allPosts);
 // });

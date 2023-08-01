@@ -7,9 +7,9 @@ const { body, validationResult } = require("express-validator");
 exports.comment_create = [
   body("commentContent")
     .trim()
-    .isLength({ min: 1 })
+    .isLength({ min: 1, max: 200 })
     .escape()
-    .withMessage("Content must be specified"),
+    .withMessage("Content must be between 1 and 200 characters"),
 
   asyncHandler(async (req, res, next) => {
     // Extract errors

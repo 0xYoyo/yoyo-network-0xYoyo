@@ -10,19 +10,19 @@ const { validatePassword } = require("../utils/validatePassword");
 exports.register_post = [
   body("displayName")
     .trim()
-    .isLength({ min: 1 })
+    .isLength({ min: 1, max: 50 })
     .escape()
-    .withMessage("display name must be specified."),
+    .withMessage("Display name must be between 1 and 50 characters."),
   body("username")
     .trim()
-    .isLength({ min: 1 })
+    .isLength({ min: 1, max: 20 })
     .escape()
-    .withMessage("username must be specified."),
+    .withMessage("Username must be between 1 and 20 characters."),
   body("password")
     .trim()
-    .isLength({ min: 1 })
+    .isLength({ min: 1, max: 200 })
     .escape()
-    .withMessage("password must be longer than 1 characters."),
+    .withMessage("Password must be between 1 and 200 characters."),
 
   asyncHandler(async (req, res, next) => {
     // Extract errors
@@ -62,14 +62,14 @@ exports.register_post = [
 exports.login_post = [
   body("username")
     .trim()
-    .isLength({ min: 1 })
+    .isLength({ min: 1, max: 20 })
     .escape()
-    .withMessage("username must be specified."),
+    .withMessage("Username must be between 1 and 20 characters."),
   body("password")
     .trim()
-    .isLength({ min: 1 })
+    .isLength({ min: 1, max: 200 })
     .escape()
-    .withMessage("password must be longer than 1 characters."),
+    .withMessage("Password must be between 1 and 200 characters."),
 
   asyncHandler(async (req, res, next) => {
     // Extract errors

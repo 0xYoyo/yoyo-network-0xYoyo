@@ -1,3 +1,4 @@
+const Blacklist = require("../models/blacklist");
 const Post = require("../models/post");
 const User = require("../models/user");
 const asyncHandler = require("express-async-handler");

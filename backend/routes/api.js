@@ -121,6 +121,16 @@ router.post("/register", auth_controller.register_post);
 // POST request for logging in.
 router.post("/login", auth_controller.login_post);
 
+// PUT request for logging out
+router.put(
+  "/logout",
+  passport.authenticate("jwt", { session: false }),
+  auth_controller.logout_post
+);
+
+// POST request for logging in as a guest.
+router.post("/demo", auth_controller.guest_login_post);
+
 module.exports = router;
 
 /// OPTIONAL ///

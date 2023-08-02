@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 const { issueJWT } = require("../utils/issueJWT");
 const { validatePassword } = require("../utils/validatePassword");
+const Blacklist = require("../models/blacklist");
 
 // Handle register.
 exports.register_post = [
@@ -106,3 +107,40 @@ exports.login_post = [
     }
   }),
 ];
+
+// Handle logout on PUT.
+exports.logout_post = asyncHandler(async (req, res, next) => {
+  const updatedBlacklist = await Blacklist.findOneAndUpdate(
+    {},
+    { $push: { tokens: req.headers.authorization.split(" ")[1] } },
+    { new: true }
+  );
+  res.json(updatedBlacklist);
+});
+
+// Handle login as a guest on POST.
+exports.guest_login_post = asyncHandler(async (req, res, next) => {
+  const demoUser = await User.findOne({ username: process.env.DEMO_USERNAME });
+  if (!demoUser) {
+    res.status(401).json({ success: false, msg: "could not find user" });
+  }
+  // Validate password
+  const isValid = await validatePassword(
+    process.env.DEMO_PASSWORD,
+    demoUser.password
+  );
+  console.log(isValid);
+  if (isValid === true) {
+    const jwt = issueJWT(demoUser);
+    res.status(200).json({
+      success: true,
+      user: demoUser,
+      token: jwt.token,
+      expiresIn: jwt.expires,
+    });
+  } else {
+    res
+      .status(401)
+      .json({ success: false, msg: "you entered the wrong password" });
+  }
+});

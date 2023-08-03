@@ -51,11 +51,26 @@ exports.user_edit = [
       return;
     } else {
       if (req.user._id.valueOf() === req.params.id) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: req.user._id },
-          { $set: { displayName: req.body.displayName, bio: req.body.bio } },
-          { new: true }
-        );
+        let updatedUser;
+        if (req.file) {
+          updatedUser = await User.findOneAndUpdate(
+            { _id: req.user._id },
+            {
+              $set: {
+                displayName: req.body.displayName,
+                bio: req.body.bio,
+                pfpUrl: req.file.path,
+              },
+            },
+            { new: true }
+          );
+        } else {
+          updatedUser = await User.findOneAndUpdate(
+            { _id: req.user._id },
+            { $set: { displayName: req.body.displayName, bio: req.body.bio } },
+            { new: true }
+          );
+        }
         res.json(updatedUser);
       } else {
         res

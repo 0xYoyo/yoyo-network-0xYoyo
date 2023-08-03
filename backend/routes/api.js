@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { upload } = require("../config/upload");
 
 // Require controller modules.
 const post_controller = require("../controllers/postController");
@@ -22,6 +23,7 @@ router.get(
 router.post(
   "/post",
   passport.authenticate("jwt", { session: false }),
+  upload.single("pic"),
   post_controller.post_create
 );
 
@@ -89,6 +91,7 @@ router.get(
 router.put(
   "/profile/:id",
   passport.authenticate("jwt", { session: false }),
+  upload.single("pfp"),
   user_controller.user_edit
 );
 

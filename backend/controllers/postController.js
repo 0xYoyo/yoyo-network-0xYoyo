@@ -38,10 +38,19 @@ exports.post_create = [
     const errors = validationResult(req);
     console.log(req.user);
     // Create post
-    const post = new Post({
-      author: req.user._id,
-      postContent: req.body.postContent,
-    });
+    let post;
+    if (req.file) {
+      post = new Post({
+        author: req.user._id,
+        postContent: req.body.postContent,
+        pictureUrl: req.file.path,
+      });
+    } else {
+      post = new Post({
+        author: req.user._id,
+        postContent: req.body.postContent,
+      });
+    }
 
     if (!errors.isEmpty()) {
       res.json({

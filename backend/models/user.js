@@ -10,6 +10,12 @@ const UserSchema = new Schema({
   posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
   followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
   following: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  pfpUrl: {
+    type: String,
+    required: true,
+    default:
+      "https://res.cloudinary.com/dhxnvmhz2/image/upload/v1691074134/yoyo_network/profile_nd5iwd_zr7e8t.jpg",
+  },
 });
 
 module.exports = mongoose.model("User", UserSchema);

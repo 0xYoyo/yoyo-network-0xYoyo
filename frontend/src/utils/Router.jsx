@@ -9,12 +9,13 @@ import Followers from "../components/pages/Followers.jsx";
 import Following from "../components/pages/Following.jsx";
 import DefaultProfile from "../components/pages/DefaultProfile.jsx";
 import ErrorPage from "../components/pages/ErrorPage.jsx";
+import { isLoggedIn } from "./authService.js";
 
 const Router = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <App />,
+      element: isLoggedIn() ? <App /> : <Login />,
       errorElement: <ErrorPage />,
       children: [
         { path: "home", element: <Home /> },

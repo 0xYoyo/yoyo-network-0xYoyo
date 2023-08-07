@@ -45,7 +45,7 @@ function Login() {
         <button>Log in</button>
       </form>
       <p>
-        {"Don't have and account? "} <Link to={"/sign-up"}>Sign up</Link>
+        {"Don't have an account? "} <Link to={"/sign-up"}>Sign up</Link>
       </p>
       {errors && <p>{errors}</p>}
     </div>

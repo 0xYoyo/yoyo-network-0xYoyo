@@ -8,8 +8,10 @@ exports.index = asyncHandler(async (req, res, next) => {
   const latestPosts = await Post.find({
     $or: [{ author: { $in: req.user.following } }, { author: req.user._id }],
   })
+    .populate("author")
     .sort({ timestamp: -1 })
-    .limit(10);
+    .limit(10)
+    .exec();
   res.json(latestPosts);
 });
 

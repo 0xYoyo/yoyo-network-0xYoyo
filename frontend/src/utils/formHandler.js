@@ -26,7 +26,6 @@ async function postFormDataAsJson({ url, formData }) {
   const response = await fetch(url, fetchOptions);
 
   if (!response.ok) {
-    // console.log("response: " + JSON.parse(await response.text()));
     const errorMessage = await response.text();
     const errorObj = JSON.parse(errorMessage);
     console.log(errorObj.msg);

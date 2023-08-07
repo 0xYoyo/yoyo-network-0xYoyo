@@ -2,6 +2,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API_URL } from "../../utils/config";
 import { handleForm } from "../../utils/formHandler";
+import { setLocalStorage } from "../../utils/authService";
 
 function Login() {
   const navigate = useNavigate();
@@ -23,7 +24,19 @@ function Login() {
       //  useNavigate does not refresh route therefore have to reload manually
       window.location.pathname = "/";
     } catch (error) {
-      console.log("This is " + error);
+      setErrors(`${error}`);
+    }
+  };
+
+  const handleGuest = async () => {
+    try {
+      const response = await fetch(`${API_URL}/demo`, { method: "POST" });
+      const responseObj = await response.json();
+      console.log(responseObj);
+      setLocalStorage(responseObj);
+      //  useNavigate does not refresh route therefore have to reload manually
+      window.location.pathname = "/";
+    } catch (error) {
       setErrors(`${error}`);
     }
   };
@@ -47,6 +60,8 @@ function Login() {
       <p>
         {"Don't have an account? "} <Link to={"/sign-up"}>Sign up</Link>
       </p>
+      <button onClick={handleGuest}>Enter as guest</button>
+
       {errors && <p>{errors}</p>}
     </div>
   );

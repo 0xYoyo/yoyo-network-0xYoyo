@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -66,4 +69,18 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+dialog form {
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  max-height: 30px;
 }

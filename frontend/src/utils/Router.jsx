@@ -18,6 +18,7 @@ const Router = () => {
       element: isLoggedIn() ? <App /> : <Login />,
       errorElement: <ErrorPage />,
       children: [
+        { index: true, element: <Home /> },
         { path: "home", element: <Home /> },
         { path: "explore", element: <Explore /> },
         { path: "profile", element: <DefaultProfile /> },

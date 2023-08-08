@@ -17,8 +17,14 @@ function NewPost() {
       <form>
         <h5>New Post:</h5>
         <label htmlFor="postContent">Content:</label>
-        <input ref={inputRef} type="text" id="name" required />
-        <button type="submit">Submit result</button>
+        <input
+          ref={inputRef}
+          type="text"
+          id="postContent"
+          name="postContent"
+          required
+        />
+        <button type="submit">Send</button>
       </form>
     </dialog>
   );

@@ -1,7 +1,7 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API_URL } from "../../utils/config";
-import { handleForm } from "../../utils/formHandler";
+import { handleAuthForm } from "../../utils/authFormHandler";
 import { setLocalStorage } from "../../utils/authService";
 
 function Login() {
@@ -20,7 +20,7 @@ function Login() {
     const form = event.currentTarget;
 
     try {
-      await handleForm(form);
+      await handleAuthForm(form);
       //  useNavigate does not refresh route therefore have to reload manually
       window.location.pathname = "/";
     } catch (error) {

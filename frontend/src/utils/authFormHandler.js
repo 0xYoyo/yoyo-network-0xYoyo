@@ -1,6 +1,6 @@
 import { setLocalStorage } from "./authService";
 
-const handleForm = async (form) => {
+const handleAuthForm = async (form) => {
   const url = form.action;
   const formData = new FormData(form);
   const responseData = await postFormDataAsJson({ url, formData });
@@ -34,4 +34,4 @@ async function postFormDataAsJson({ url, formData }) {
   return response.json();
 }
 
-export { handleForm };
+export { handleAuthForm, postFormDataAsJson };

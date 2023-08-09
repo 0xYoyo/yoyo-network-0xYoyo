@@ -14,7 +14,7 @@ function NewComment({ props }) {
     const responseData = await postFormDataAsJson({ url, formData });
     console.log({ responseData });
     closeNewComment();
-    handleUpdateComment(responseData[1]);
+    handleUpdateComment(responseData);
     form.reset();
   };
 

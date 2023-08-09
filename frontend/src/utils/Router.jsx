@@ -9,6 +9,7 @@ import Followers from "../components/pages/Followers.jsx";
 import Following from "../components/pages/Following.jsx";
 import DefaultProfile from "../components/pages/DefaultProfile.jsx";
 import ErrorPage from "../components/pages/ErrorPage.jsx";
+import PostDetail from "../components/pages/PostDetail.jsx";
 import { isLoggedIn } from "./authService.js";
 
 const Router = () => {
@@ -25,7 +26,7 @@ const Router = () => {
         { path: "profile/:userid", element: <Profile /> },
         { path: "profile/:userid/following", element: <Following /> },
         { path: "profile/:userid/followers", element: <Followers /> },
-        { path: "post/:postid", element: <Home /> },
+        { path: "post/:postid", element: <PostDetail /> },
       ],
     },
     {

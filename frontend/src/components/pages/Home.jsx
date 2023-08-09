@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "../../utils/config";
 import Post from "../parts/Post";
-// import { useInterceptor } from "../../utils/useInterceptor";
 
 function Home() {
   const [posts, setPosts] = useState([]);
+
   const getPosts = async () => {
     const response = await fetch(`${API_URL}`, {});
     return response.json();
@@ -17,7 +17,6 @@ function Home() {
     }
     fetchPosts();
   }, []);
-  console.log(posts);
 
   return (
     <div className="Home">

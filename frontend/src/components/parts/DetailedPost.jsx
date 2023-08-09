@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import { API_URL } from "../../utils/config";
 import { useState } from "react";
 import NewComment from "./NewComment";
+import Comment from "./Comment";
 
-function Post({ post }) {
+function DetailedPost({ post, comments }) {
   const [postObj, setPostObj] = useState(post);
+  const [commentsArr, setCommentsArr] = useState(comments);
   const [newCommentActive, setNewCommentActive] = useState(false);
 
   const handleNewComment = () => {
@@ -18,6 +20,7 @@ function Post({ post }) {
   };
   const handleUpdateComment = (resObj) => {
     setPostObj(resObj[1]);
+    setCommentsArr([...commentsArr, resObj[0]]);
   };
 
   const handleLike = async () => {
@@ -30,18 +33,22 @@ function Post({ post }) {
 
   return (
     <div className="postPreview">
-      <Link to={`/post/${post._id}`}>
-        <div className="postContents">
+      <div className="postContents">
+        <Link to={`/profile/${post.author._id}`}>
           <div className="userPreview">
             <img src={post.author.pfpUrl} alt="pfp" /> {post.author.displayName}
           </div>
-          <div className="contentPreview">
-            <p>{post.postContent}</p>
-            {post.pictureUrl && <img src={post.pictureUrl} alt="img" />}
-            <p>{DateTime.fromISO(post.timestamp).toLocaleString()}</p>
-          </div>
+        </Link>
+        <div className="contentPreview">
+          <p>{post.postContent}</p>
+          {post.pictureUrl && <img src={post.pictureUrl} alt="img" />}
+          <p>
+            {DateTime.fromISO(post.timestamp).toLocaleString(
+              DateTime.DATETIME_FULL
+            )}
+          </p>
         </div>
-      </Link>
+      </div>
       <div className="postStats">
         <button className="postLikes" onClick={handleLike}>
           <AiOutlineHeart /> {postObj.likedBy.length}
@@ -50,6 +57,15 @@ function Post({ post }) {
           <AiOutlineComment /> {postObj.comments.length}
         </button>
       </div>
+      <div className="postComments">
+        <ul className="comments">
+          {commentsArr.map((comment) => (
+            <li key={comment._id}>
+              <Comment comment={comment} />
+            </li>
+          ))}
+        </ul>
+      </div>
       {newCommentActive && (
         <NewComment props={[post, handleUpdateComment, closeNewComment]} />
       )}
@@ -57,8 +73,9 @@ function Post({ post }) {
   );
 }
 
-Post.propTypes = {
+DetailedPost.propTypes = {
   post: PropTypes.object,
+  comments: PropTypes.array,
 };
 
-export default Post;
+export default DetailedPost;

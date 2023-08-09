@@ -29,12 +29,13 @@ exports.comment_create = [
       return;
     } else {
       const newComment = await comment.save();
+      const populatedComment = await newComment.populate("author");
       const updatedPost = await Post.findOneAndUpdate(
         { _id: req.params.id },
         { $push: { comments: newComment._id } },
         { new: true }
       );
-      res.json([newComment, updatedPost]);
+      res.json([populatedComment, updatedPost]);
     }
   }),
 ];

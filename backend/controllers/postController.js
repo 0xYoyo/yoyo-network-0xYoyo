@@ -1,6 +1,7 @@
 const Blacklist = require("../models/blacklist");
 const Post = require("../models/post");
 const User = require("../models/user");
+const Comment = require("../models/comment");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
@@ -17,9 +18,9 @@ exports.index = asyncHandler(async (req, res, next) => {
 
 // Display detail page for a specific post.
 exports.post_detail = asyncHandler(async (req, res, next) => {
-  const post = await Post.findById(req.params.id)
+  const post = await Post.findById(req.params.id).populate("author").exec();
+  const comments = await Comment.find({ parentPost: post._id })
     .populate("author")
-    .populate("comments")
     .exec();
 
   if (post === null) {
@@ -28,7 +29,7 @@ exports.post_detail = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.json(post);
+  res.json([post, comments]);
 });
 
 // Handle post create on POST.

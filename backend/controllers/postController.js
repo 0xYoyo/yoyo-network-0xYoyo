@@ -96,17 +96,19 @@ exports.post_delete = asyncHandler(async (req, res, next) => {
 
 // Handle post like on PUT
 exports.post_like = asyncHandler(async (req, res, next) => {
-  const isLiked = await Post.find({ likedBy: req.user._id });
-  if (isLiked && isLiked.length) {
+  const post = await Post.findById(req.params.id);
+  const isLiked = post.likedBy.includes(req.user._id);
+  console.log(isLiked);
+  if (post && isLiked) {
     const updatedPost = await Post.findOneAndUpdate(
-      { _id: req.params.id },
+      { _id: post._id },
       { $pull: { likedBy: req.user._id } },
       { new: true }
     );
     res.json(updatedPost);
   } else {
     const updatedPost = await Post.findOneAndUpdate(
-      { _id: req.params.id },
+      { _id: post._id },
       { $push: { likedBy: req.user._id } },
       { new: true }
     );

@@ -11,9 +11,9 @@ import NewPost from "./NewPost";
 function Nav() {
   const [newPostActive, setNewPostActive] = useState(false);
   const handleNewPost = () => {
-    setNewPostActive(true);
+    setNewPostActive((current) => !current);
   };
-  const updateNewPost = () => {
+  const closeNewPost = () => {
     setNewPostActive(false);
   };
 
@@ -41,7 +41,7 @@ function Nav() {
           </button>
         </li>
       </ul>
-      {newPostActive && <NewPost updateNewPost={updateNewPost} />}
+      {newPostActive && <NewPost closeNewPost={closeNewPost} />}
     </div>
   );
 }

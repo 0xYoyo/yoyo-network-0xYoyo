@@ -11,11 +11,12 @@ function Post({ post }) {
   const [newCommentActive, setNewCommentActive] = useState(false);
 
   const handleNewComment = () => {
-    setNewCommentActive(true);
+    setNewCommentActive((current) => !current);
   };
-
-  const handleUpdateComment = (resObj) => {
+  const closeNewComment = () => {
     setNewCommentActive(false);
+  };
+  const handleUpdateComment = (resObj) => {
     setPostObj(resObj);
   };
 
@@ -50,7 +51,9 @@ function Post({ post }) {
           <AiOutlineComment /> {postObj.comments.length}
         </button>
       </div>
-      {newCommentActive && <NewComment props={[post, handleUpdateComment]} />}
+      {newCommentActive && (
+        <NewComment props={[post, handleUpdateComment, closeNewComment]} />
+      )}
     </div>
   );
 }

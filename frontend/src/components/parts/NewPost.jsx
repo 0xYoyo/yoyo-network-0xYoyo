@@ -4,7 +4,7 @@ import { handleMultiPartForm } from "../../utils/multiPartFormHandler";
 import { PropTypes } from "prop-types";
 import { useNavigate } from "react-router-dom";
 
-function NewPost({ updateNewPost }) {
+function NewPost({ closeNewPost }) {
   const modalRef = useRef(null);
   const [errors, setErrors] = useState("");
   const navigate = useNavigate();
@@ -14,9 +14,15 @@ function NewPost({ updateNewPost }) {
     const form = event.currentTarget;
     try {
       await handleMultiPartForm(form);
-      updateNewPost();
+      closeNewPost();
       form.reset();
-      navigate(0);
+      if (
+        window.location.pathname == "/" ||
+        window.location.pathname == "/home" ||
+        window.location.pathname == "/profile"
+      ) {
+        navigate(0);
+      }
     } catch (error) {
       setErrors(`${error}`);
     }
@@ -30,6 +36,7 @@ function NewPost({ updateNewPost }) {
 
   return (
     <dialog ref={modalRef}>
+      <button onClick={closeNewPost}>X</button>
       <form
         action={`${API_URL}/post`}
         encType="multipart/form-data"
@@ -39,7 +46,7 @@ function NewPost({ updateNewPost }) {
         <h5>New Post:</h5>
         <label htmlFor="postContent">Content:</label>
         <input type="text" id="postContent" name="postContent" required />
-        <label htmlFor="pic">Content:</label>
+        <label htmlFor="pic">Upload picture:</label>
         <input type="file" id="pic" name="pic" />
         <button type="submit">Send</button>
       </form>
@@ -49,7 +56,7 @@ function NewPost({ updateNewPost }) {
 }
 
 NewPost.propTypes = {
-  updateNewPost: PropTypes.func,
+  closeNewPost: PropTypes.func,
 };
 
 export default NewPost;

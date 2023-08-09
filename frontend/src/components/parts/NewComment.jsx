@@ -4,7 +4,7 @@ import { PropTypes } from "prop-types";
 import { postFormDataAsJson } from "../../utils/authFormHandler";
 
 function NewComment({ props }) {
-  const [post, handleUpdateComment] = props;
+  const [post, handleUpdateComment, closeNewComment] = props;
   const modalRef = useRef(null);
   const [errors, setErrors] = useState("");
 
@@ -13,6 +13,7 @@ function NewComment({ props }) {
     const formData = new FormData(form);
     const responseData = await postFormDataAsJson({ url, formData });
     console.log({ responseData });
+    closeNewComment();
     handleUpdateComment(responseData[1]);
     form.reset();
   };
@@ -35,6 +36,7 @@ function NewComment({ props }) {
 
   return (
     <dialog ref={modalRef}>
+      <button onClick={closeNewComment}>X</button>
       <form
         action={`${API_URL}/post/${post._id}/comment`}
         method="POST"
@@ -52,9 +54,6 @@ function NewComment({ props }) {
 
 NewComment.propTypes = {
   props: PropTypes.array,
-  //   post: PropTypes.object,
-  //   setNewCommentActive: PropTypes.func,
-  //   setPostObj: PropTypes.func,
 };
 
 export default NewComment;

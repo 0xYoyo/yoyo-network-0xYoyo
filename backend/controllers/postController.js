@@ -17,7 +17,10 @@ exports.index = asyncHandler(async (req, res, next) => {
 
 // Display detail page for a specific post.
 exports.post_detail = asyncHandler(async (req, res, next) => {
-  const post = await Post.findById(req.params.id).populate("comments");
+  const post = await Post.findById(req.params.id)
+    .populate("author")
+    .populate("comments")
+    .exec();
 
   if (post === null) {
     const err = new Error("Post not found");

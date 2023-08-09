@@ -13,6 +13,9 @@ function Nav() {
   const handleNewPost = () => {
     setNewPostActive(true);
   };
+  const updateNewPost = () => {
+    setNewPostActive(false);
+  };
 
   return (
     <div className="Nav">
@@ -38,7 +41,7 @@ function Nav() {
           </button>
         </li>
       </ul>
-      {newPostActive && <NewPost />}
+      {newPostActive && <NewPost updateNewPost={updateNewPost} />}
     </div>
   );
 }

@@ -24,6 +24,7 @@ function Post({ post }) {
       method: "PUT",
     });
     const responseObj = await response.json();
+    console.log(responseObj);
     setPostObj(responseObj);
   };
 

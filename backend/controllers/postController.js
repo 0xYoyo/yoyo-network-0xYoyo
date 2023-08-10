@@ -29,7 +29,7 @@ exports.post_detail = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.json([post, comments]);
+  res.json([post, comments, req.user._id]);
 });
 
 // Handle post create on POST.
@@ -89,8 +89,10 @@ exports.post_delete = asyncHandler(async (req, res, next) => {
       { $pull: { posts: req.params.id } },
       { new: true }
     );
+    const deletedComments = await Comment.deleteMany({ parentPost: post._id });
     const deletedPost = await Post.findByIdAndDelete(req.params.id);
-    res.json([deletedPost, updatedUser]);
+    console.log([deletedPost, updatedUser, deletedComments]);
+    res.json([deletedPost, updatedUser, deletedComments]);
   } else {
     console.log(post.author.valueOf());
     console.log(req.user._id.valueOf());

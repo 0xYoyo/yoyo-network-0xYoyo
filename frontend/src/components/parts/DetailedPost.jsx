@@ -1,16 +1,28 @@
 import { DateTime } from "luxon";
 import PropTypes from "prop-types";
-import { AiOutlineComment, AiOutlineHeart } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import {
+  AiOutlineComment,
+  AiOutlineDelete,
+  AiOutlineHeart,
+} from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
 import { API_URL } from "../../utils/config";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NewComment from "./NewComment";
 import Comment from "./Comment";
 
-function DetailedPost({ post, comments }) {
+function DetailedPost({ post, comments, userId }) {
   const [postObj, setPostObj] = useState(post);
   const [commentsArr, setCommentsArr] = useState(comments);
   const [newCommentActive, setNewCommentActive] = useState(false);
+  const [isPostAuthor, setIsPostAuthor] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (post.author._id == userId) {
+      setIsPostAuthor(true);
+    }
+  }, [post, userId]);
 
   const handleNewComment = () => {
     setNewCommentActive((current) => !current);
@@ -20,7 +32,14 @@ function DetailedPost({ post, comments }) {
   };
   const handleUpdateComment = (resObj) => {
     setPostObj(resObj[1]);
-    setCommentsArr([...commentsArr, resObj[0]]);
+    setCommentsArr([resObj[0], ...commentsArr]);
+  };
+  const handleDeleteComment = (resObj) => {
+    console.log(resObj);
+    setCommentsArr((commentArr) =>
+      commentArr.filter((c) => c._id !== resObj[0]._id)
+    );
+    setPostObj(resObj[1]);
   };
 
   const handleLike = async () => {
@@ -31,8 +50,22 @@ function DetailedPost({ post, comments }) {
     setPostObj(responseObj);
   };
 
+  const handleDeletePost = async () => {
+    const response = await fetch(`${API_URL}/post/${post._id}`, {
+      method: "DELETE",
+    });
+    const responseObj = await response.json();
+    console.log(responseObj);
+    navigate(-1);
+  };
+
   return (
     <div className="postPreview">
+      {isPostAuthor && (
+        <button>
+          <AiOutlineDelete onClick={handleDeletePost} />
+        </button>
+      )}
       <div className="postContents">
         <Link to={`/profile/${post.author._id}`}>
           <div className="userPreview">
@@ -61,7 +94,11 @@ function DetailedPost({ post, comments }) {
         <ul className="comments">
           {commentsArr.map((comment) => (
             <li key={comment._id}>
-              <Comment comment={comment} />
+              <Comment
+                comment={comment}
+                userId={userId}
+                handleDeleteComment={handleDeleteComment}
+              />
             </li>
           ))}
         </ul>
@@ -76,6 +113,7 @@ function DetailedPost({ post, comments }) {
 DetailedPost.propTypes = {
   post: PropTypes.object,
   comments: PropTypes.array,
+  userId: PropTypes.string,
 };
 
 export default DetailedPost;

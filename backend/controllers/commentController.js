@@ -3,7 +3,7 @@ const Post = require("../models/post");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
-// Handle comment create on POST. ***TODO***
+// Handle comment create on POST.
 exports.comment_create = [
   body("commentContent")
     .trim()
@@ -40,7 +40,7 @@ exports.comment_create = [
   }),
 ];
 
-// Handle comment delete on DELETE. ***TODO***
+// Handle comment delete on DELETE.
 exports.comment_delete = asyncHandler(async (req, res, next) => {
   const comment = await Comment.findById(req.params.commentid);
   if (!comment) {

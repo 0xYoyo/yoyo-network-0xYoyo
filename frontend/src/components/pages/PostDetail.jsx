@@ -7,6 +7,7 @@ function PostDetail() {
   const { postid } = useParams();
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
+  const [userId, setUserId] = useState("");
 
   const getPost = async () => {
     const response = await fetch(`${API_URL}/post/${postid}`, {});
@@ -15,7 +16,8 @@ function PostDetail() {
 
   useEffect(() => {
     async function fetchPost() {
-      const [newPost, newComments] = await getPost();
+      const [newPost, newComments, newUserId] = await getPost();
+      setUserId(newUserId);
       setPost(newPost);
       setComments(newComments);
     }
@@ -26,7 +28,7 @@ function PostDetail() {
   return (
     post && (
       <div className="PostDetail">
-        <DetailedPost post={post} comments={comments} />
+        <DetailedPost post={post} comments={comments} userId={userId} />
       </div>
     )
   );

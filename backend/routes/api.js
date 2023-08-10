@@ -75,7 +75,7 @@ router.get(
 
 // GET request for exploring non-followed users.
 router.get(
-  "/profile/explore",
+  "/explore",
   passport.authenticate("jwt", { session: false }),
   user_controller.user_list
 );

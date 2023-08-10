@@ -18,7 +18,7 @@ exports.user_list = asyncHandler(async (req, res, next) => {
     followers: { $ne: req.user._id },
     _id: { $ne: req.user._id },
   }).limit(10);
-  res.json(nonFollowed);
+  res.json([nonFollowed, req.user]);
 });
 
 exports.user_detail = asyncHandler(async (req, res, next) => {
@@ -92,7 +92,9 @@ exports.user_following = asyncHandler(async (req, res, next) => {
 });
 
 exports.user_follow = asyncHandler(async (req, res, next) => {
-  const isFollowed = await User.find({ followers: req.user._id });
+  const isFollowed = await User.find({
+    $and: [{ _id: req.params.id }, { followers: req.user._id }],
+  });
   if (isFollowed && isFollowed.length) {
     const updatedUserFollowed = await User.findOneAndUpdate(
       { _id: req.params.id },
@@ -105,7 +107,6 @@ exports.user_follow = asyncHandler(async (req, res, next) => {
       { $pull: { following: req.params.id } },
       { new: true }
     );
-
     res.json([updatedUserFollowed, updatedUserFollowing]);
   } else {
     const updatedUserFollowed = await User.findOneAndUpdate(

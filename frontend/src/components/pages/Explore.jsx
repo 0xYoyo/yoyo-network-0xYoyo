@@ -21,6 +21,7 @@ function Explore() {
 
   return (
     <div className="Explore">
+      <h1>Explore</h1>
       <ul className="users">
         {users.map((user) => (
           <li key={user._id}>

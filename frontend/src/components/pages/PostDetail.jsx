@@ -9,12 +9,11 @@ function PostDetail() {
   const [comments, setComments] = useState([]);
   const [userId, setUserId] = useState("");
 
-  const getPost = async () => {
-    const response = await fetch(`${API_URL}/post/${postid}`, {});
-    return response.json();
-  };
-
   useEffect(() => {
+    const getPost = async () => {
+      const response = await fetch(`${API_URL}/post/${postid}`, {});
+      return response.json();
+    };
     async function fetchPost() {
       const [newPost, newComments, newUserId] = await getPost();
       setUserId(newUserId);
@@ -22,8 +21,7 @@ function PostDetail() {
       setComments(newComments);
     }
     fetchPost();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [postid]);
 
   return (
     post && (

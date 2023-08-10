@@ -5,7 +5,9 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
 exports.user_my_profile = asyncHandler(async (req, res, next) => {
-  const user = await User.findById(req.user._id).populate("posts").exec();
+  const user = await User.findById(req.user._id)
+    .populate({ path: "posts", populate: { path: "author" } })
+    .exec();
   res.json(user);
 });
 

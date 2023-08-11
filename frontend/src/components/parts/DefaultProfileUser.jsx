@@ -3,12 +3,23 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 // import { API_URL } from "../../utils/config";
 import { AiOutlineEdit } from "react-icons/ai";
+import EditProfile from "./EditProfile";
 
 function ProfileUser({ myUser }) {
   const [currentUser, setCurrentUser] = useState(myUser);
+  const [editActive, setEditActive] = useState(false);
 
-  const handleEdit = async () => {
-    setCurrentUser({ todo: "Todo" });
+  const handleStatusChange = () => {
+    setEditActive((current) => !current);
+  };
+
+  const handleUpdateUser = (resObj) => {
+    setCurrentUser(resObj);
+    setEditActive(false);
+  };
+
+  const closeEdit = () => {
+    setEditActive(false);
   };
 
   return (
@@ -28,10 +39,17 @@ function ProfileUser({ myUser }) {
           <strong>{currentUser.following.length}</strong>Following
         </Link>
       </div>
-      <button onClick={handleEdit}>
+      <button onClick={handleStatusChange}>
         <AiOutlineEdit />
         Edit
       </button>
+      {editActive && (
+        <EditProfile
+          currentUser={currentUser}
+          handleUpdateUser={handleUpdateUser}
+          closeEdit={closeEdit}
+        />
+      )}
     </div>
   );
 }

@@ -1,8 +1,12 @@
 const handleMultiPartForm = async (form) => {
   const url = form.action;
-  const formMethod = form.method;
+  let formMethod;
+  if (form.method == "get") {
+    formMethod = "put";
+  } else {
+    formMethod = form.method;
+  }
   const formData = new FormData(form);
-  console.log(formMethod);
   const fetchOptions = {
     method: formMethod,
     body: formData,
@@ -15,7 +19,7 @@ const handleMultiPartForm = async (form) => {
     throw new Error(`${errorObj.msg}`);
   }
   const responseObj = await response.json();
-  console.log(responseObj);
+  return responseObj;
 };
 
 export { handleMultiPartForm };

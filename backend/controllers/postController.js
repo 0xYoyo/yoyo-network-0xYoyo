@@ -13,7 +13,7 @@ exports.index = asyncHandler(async (req, res, next) => {
     .sort({ timestamp: -1 })
     .limit(10)
     .exec();
-  res.json(latestPosts);
+  res.json([latestPosts, req.user]);
 });
 
 // Display detail page for a specific post.

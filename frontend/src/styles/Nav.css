@@ -2,9 +2,9 @@
   height: 90vh;
   width: 320px;
   position: fixed;
-  border-right: 1px solid #3f72af;
   box-sizing: border-box;
   background-color: #f1efe7;
+  z-index: 999;
 }
 
 .Nav ul {

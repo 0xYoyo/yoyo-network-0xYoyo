@@ -1,0 +1,100 @@
+.Home h1 {
+  color: #112d4e;
+  margin: 0;
+  padding: 1rem;
+  border-bottom: 1px solid #3f72af;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.posts button {
+  background-color: #f2eede;
+  border-color: #112d4e;
+}
+
+.posts li {
+  border-bottom: 1px solid #3f72af;
+  padding: 1rem;
+}
+.posts li:hover {
+  background-color: #ebe8db;
+  cursor: pointer;
+}
+
+.postPreview a:hover {
+  color: inherit;
+}
+
+.postContents {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
+}
+
+.userPreview {
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+}
+.userPreview img {
+  max-height: 40px;
+  border-radius: 10%;
+}
+
+.contentPreview {
+  align-self: center;
+  padding-bottom: 12px;
+}
+.postImage {
+  max-height: 250px;
+  border-radius: 5%;
+}
+
+.timestamp {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+}
+
+.postStats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.postStats button {
+  padding: 0.6rem 3.6rem;
+}
+
+.postLikes:hover,
+.likedActive {
+  color: rgb(240, 87, 87);
+}
+.postComments:hover {
+  color: #3f72af;
+}
+
+@media (max-width: 769px) {
+  .Home {
+    border: none;
+  }
+}
+
+@media (max-width: 481px) {
+  .postImage {
+    max-height: 150px;
+  }
+  .postStats button {
+    padding: 0.6rem 1.8rem;
+  }
+}

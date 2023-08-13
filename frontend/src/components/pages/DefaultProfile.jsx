@@ -30,7 +30,7 @@ function DefaultProfile() {
         <ul className="posts">
           {myUser.posts.map((post) => (
             <li key={post._id}>
-              <Post post={post} />
+              <Post post={post} user={myUser} />
             </li>
           ))}
         </ul>

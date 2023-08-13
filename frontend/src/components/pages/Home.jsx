@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "../../utils/config";
 import Post from "../parts/Post";
+import "../../styles/Home.css";
 
 function Home() {
   const [posts, setPosts] = useState([]);
+  const [user, setUser] = useState({});
 
   const getPosts = async () => {
     const response = await fetch(`${API_URL}`, {});
@@ -12,8 +14,9 @@ function Home() {
 
   useEffect(() => {
     async function fetchPosts() {
-      const newPosts = await getPosts();
+      const [newPosts, newUser] = await getPosts();
       setPosts(newPosts);
+      setUser(newUser);
     }
     fetchPosts();
   }, []);
@@ -24,7 +27,7 @@ function Home() {
       <ul className="posts">
         {posts.map((post) => (
           <li key={post._id}>
-            <Post post={post} />
+            <Post post={post} user={user} />
           </li>
         ))}
       </ul>

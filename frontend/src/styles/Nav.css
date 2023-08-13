@@ -1,0 +1,34 @@
+.Nav {
+  height: 90vh;
+  width: 320px;
+  position: fixed;
+  border-right: 1px solid #3f72af;
+  box-sizing: border-box;
+}
+
+.Nav ul {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.4rem;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+}
+
+.logout {
+  margin-top: auto;
+}
+.logo {
+  padding-left: 1.4rem;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.navLink svg {
+  padding-bottom: 2px;
+}

@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import NewPost from "./NewPost";
 import { API_URL } from "../../utils/config";
 import { logout } from "../../utils/authService";
+import "../../styles/Nav.css";
 
 function Nav() {
   const [newPostActive, setNewPostActive] = useState(false);
@@ -35,17 +36,28 @@ function Nav() {
       <ul>
         <li>
           <Link to={"/home"}>
-            <AiOutlineHome /> Home
+            <img
+              src="../../../public/logoyoyo.png"
+              alt="logo"
+              className="logo"
+            />
           </Link>
         </li>
         <li>
-          <Link to={"/explore"}>
-            <AiOutlineGlobal /> Explore
+          <Link to={"/home"} className="navLink">
+            <AiOutlineHome />
+            <div>Home</div>
+          </Link>
+        </li>
+
+        <li>
+          <Link to={"/profile"} className="navLink">
+            <AiOutlineUser /> <div>Profile</div>
           </Link>
         </li>
         <li>
-          <Link to={"/profile"}>
-            <AiOutlineUser /> Profile
+          <Link to={"/explore"} className="navLink">
+            <AiOutlineGlobal /> <div>Explore</div>
           </Link>
         </li>
         <li>
@@ -53,7 +65,7 @@ function Nav() {
             <AiOutlineHighlight /> New Post
           </button>
         </li>
-        <li>
+        <li className="logout">
           <button onClick={handleLogout}>
             <AiOutlineLogout /> Log out
           </button>

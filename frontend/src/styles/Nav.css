@@ -4,6 +4,7 @@
   position: fixed;
   border-right: 1px solid #3f72af;
   box-sizing: border-box;
+  background-color: #f1efe7;
 }
 
 .Nav ul {
@@ -23,12 +24,65 @@
   padding-left: 1.4rem;
 }
 
-.navLink {
+.navLink,
+.Nav button {
   display: flex;
   align-items: center;
   gap: 3px;
 }
 
-.navLink svg {
+.icon {
   padding-bottom: 2px;
+}
+
+@media (max-width: 769px) {
+  .Nav {
+    height: 10vh;
+    width: 100%;
+    border-top: 1px solid #3f72af;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    border-right: none;
+  }
+  .Nav ul {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    font-size: 1.2rem;
+    align-items: center;
+    gap: 0;
+    justify-content: space-around;
+    margin: 0;
+  }
+
+  .navLink,
+  .Nav button {
+    flex-direction: column;
+  }
+
+  .logout {
+    margin-top: 0;
+  }
+
+  .logoContainer {
+    display: none;
+  }
+
+  .Nav button {
+    padding: 0;
+    background-color: inherit;
+  }
+
+  .Nav button:hover {
+    border-color: transparent;
+    color: #747bff;
+  }
+}
+
+@media (max-width: 481px) {
+  .navLink div,
+  .Nav button div {
+    display: none;
+  }
 }

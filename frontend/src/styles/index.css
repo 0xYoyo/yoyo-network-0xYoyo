@@ -1,11 +1,13 @@
-:root,
-html,
-body,
-#root,
-.App,
-* {
+html {
   box-sizing: border-box;
 }
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
 #root {
   min-height: 100%;
 }
@@ -46,6 +48,7 @@ h1 {
 
 button {
   border-radius: 8px;
+  color: #213547;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;

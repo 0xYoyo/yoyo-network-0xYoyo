@@ -17,3 +17,15 @@
   flex-grow: 1;
   margin-left: 320px;
 }
+
+@media (max-width: 769px) {
+  .App {
+    flex-direction: column-reverse;
+  }
+  .Home,
+  .Explore,
+  .Profile,
+  .FollowPage {
+    margin-left: 0;
+  }
+}

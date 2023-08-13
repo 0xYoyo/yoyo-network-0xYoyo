@@ -34,7 +34,7 @@ function Nav() {
   return (
     <div className="Nav">
       <ul>
-        <li>
+        <li className="logoContainer">
           <Link to={"/home"}>
             <img
               src="../../../public/logoyoyo.png"
@@ -45,29 +45,29 @@ function Nav() {
         </li>
         <li>
           <Link to={"/home"} className="navLink">
-            <AiOutlineHome />
+            <AiOutlineHome className="icon" />
             <div>Home</div>
           </Link>
         </li>
 
         <li>
           <Link to={"/profile"} className="navLink">
-            <AiOutlineUser /> <div>Profile</div>
+            <AiOutlineUser className="icon" /> <div>Profile</div>
           </Link>
         </li>
         <li>
           <Link to={"/explore"} className="navLink">
-            <AiOutlineGlobal /> <div>Explore</div>
+            <AiOutlineGlobal className="icon" /> <div>Explore</div>
           </Link>
         </li>
         <li>
           <button onClick={handleNewPost}>
-            <AiOutlineHighlight /> New Post
+            <AiOutlineHighlight className="icon" /> <div>New Post</div>
           </button>
         </li>
         <li className="logout">
           <button onClick={handleLogout}>
-            <AiOutlineLogout /> Log out
+            <AiOutlineLogout className="icon" /> <div>Log out</div>
           </button>
         </li>
       </ul>

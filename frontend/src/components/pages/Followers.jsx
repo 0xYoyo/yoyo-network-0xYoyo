@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { API_URL } from "../../utils/config";
 import User from "../parts/User";
 import { useParams } from "react-router-dom";
+import "../../styles/Follow.css";
+
 function Followers() {
   const { userid } = useParams();
   const [users, setUsers] = useState([]);

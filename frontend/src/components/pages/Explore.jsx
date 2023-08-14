@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "../../utils/config";
 import User from "../parts/User";
+import "../../styles/Explore.css";
+
 function Explore() {
   const [users, setUsers] = useState([]);
   const [myUser, setMyUser] = useState({});

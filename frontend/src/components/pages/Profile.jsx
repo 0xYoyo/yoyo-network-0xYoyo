@@ -3,6 +3,7 @@ import { API_URL } from "../../utils/config";
 import { useNavigate, useParams } from "react-router-dom";
 import ProfileUser from "../parts/ProfileUser";
 import Post from "../parts/Post";
+import "../../styles/Profile.css";
 
 function Profile() {
   const { userid } = useParams();

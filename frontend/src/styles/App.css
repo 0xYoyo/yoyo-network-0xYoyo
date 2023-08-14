@@ -33,5 +33,7 @@
   .FollowPage,
   .PostDetail {
     margin-left: 0;
+    margin-bottom: 10vh;
+    border: none;
   }
 }

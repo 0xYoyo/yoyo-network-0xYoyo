@@ -29,7 +29,7 @@ function ProfileUser({ user, myUser }) {
       <div className="profileUserPreview">
         <img src={user.pfpUrl} alt="pfp" />
         <div className="profileDetails">
-          <h4>{user.displayName}</h4>
+          <h3>{user.displayName}</h3>
           {user.bio && <p>{user.bio}</p>}
         </div>
       </div>
@@ -38,7 +38,7 @@ function ProfileUser({ user, myUser }) {
           <strong>{currentUser.followers.length}</strong> Followers
         </Link>
         <Link to={`/profile/${user._id}/following`}>
-          <strong>{currentUser.following.length}</strong>Following
+          <strong>{currentUser.following.length}</strong> Following
         </Link>
       </div>
       {isFollowed ? (

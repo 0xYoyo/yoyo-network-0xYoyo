@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { API_URL } from "../../utils/config";
 import DefaultProfileUser from "../parts/DefaultProfileUser";
 import Post from "../parts/Post";
+import "../../styles/Profile.css";
 
 function DefaultProfile() {
   const [myUser, setMyUser] = useState({});

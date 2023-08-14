@@ -85,9 +85,6 @@
 }
 
 @media (max-width: 769px) {
-  .Home {
-    border: none;
-  }
 }
 
 @media (max-width: 481px) {
@@ -96,5 +93,11 @@
   }
   .postStats button {
     padding: 0.6rem 1.8rem;
+  }
+}
+
+@media (max-width: 319px) {
+  .postImage {
+    max-height: 100px;
   }
 }

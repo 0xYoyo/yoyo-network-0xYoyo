@@ -1,0 +1,31 @@
+.Explore h1 {
+  color: #112d4e;
+  margin: 0;
+  padding: 1rem;
+  border-bottom: 1px solid #3f72af;
+}
+
+.users {
+  display: flex;
+  flex-direction: column;
+}
+
+.User {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+@media (max-width: 481px) {
+  .User {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 319px) {
+  .Explore h1 {
+    font-size: 2rem;
+  }
+}

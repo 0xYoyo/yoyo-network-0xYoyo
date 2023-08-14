@@ -1,6 +1,7 @@
 import { DateTime } from "luxon";
 import PropTypes from "prop-types";
 import {
+  AiFillHeart,
   AiOutlineComment,
   AiOutlineDelete,
   AiOutlineHeart,
@@ -16,6 +17,8 @@ function DetailedPost({ post, comments, userId }) {
   const [commentsArr, setCommentsArr] = useState(comments);
   const [newCommentActive, setNewCommentActive] = useState(false);
   const [isPostAuthor, setIsPostAuthor] = useState(false);
+  const [isLiked, setIsLiked] = useState(post.likedBy.includes(userId));
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,6 +51,7 @@ function DetailedPost({ post, comments, userId }) {
     });
     const responseObj = await response.json();
     setPostObj(responseObj);
+    setIsLiked((current) => !current);
   };
 
   const handleDeletePost = async () => {
@@ -60,21 +64,26 @@ function DetailedPost({ post, comments, userId }) {
   };
 
   return (
-    <div className="postPreview">
-      {isPostAuthor && (
-        <button>
-          <AiOutlineDelete onClick={handleDeletePost} />
-        </button>
-      )}
-      <div className="postContents">
-        <Link to={`/profile/${post.author._id}`}>
-          <div className="userPreview">
-            <img src={post.author.pfpUrl} alt="pfp" /> {post.author.displayName}
-          </div>
-        </Link>
-        <div className="contentPreview">
+    <div className="postDetail">
+      <div className="postDetailContents">
+        <div className="postTop">
+          <Link to={`/profile/${post.author._id}`}>
+            <div className="userDetailPreview">
+              <img src={post.author.pfpUrl} alt="pfp" />{" "}
+              {post.author.displayName}
+            </div>
+          </Link>
+          {isPostAuthor && (
+            <button id="delBtn">
+              <AiOutlineDelete onClick={handleDeletePost} />
+            </button>
+          )}
+        </div>
+        <div className="contentDetailPreview">
           <p>{post.postContent}</p>
-          {post.pictureUrl && <img src={post.pictureUrl} alt="img" />}
+          {post.pictureUrl && (
+            <img src={post.pictureUrl} alt="img" className="postDetailImage" />
+          )}
           <p>
             {DateTime.fromISO(post.timestamp).toLocaleString(
               DateTime.DATETIME_FULL
@@ -83,8 +92,12 @@ function DetailedPost({ post, comments, userId }) {
         </div>
       </div>
       <div className="postStats">
-        <button className="postLikes" onClick={handleLike}>
-          <AiOutlineHeart /> {postObj.likedBy.length}
+        <button
+          className={isLiked ? "postLikes likedActive" : "postLikes "}
+          onClick={handleLike}
+        >
+          {isLiked ? <AiFillHeart /> : <AiOutlineHeart />}{" "}
+          {postObj.likedBy.length}
         </button>
         <button className="postComments" onClick={handleNewComment}>
           <AiOutlineComment /> {postObj.comments.length}

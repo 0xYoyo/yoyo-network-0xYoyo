@@ -85,6 +85,9 @@
 }
 
 @media (max-width: 769px) {
+  .postImage {
+    max-height: 200px;
+  }
 }
 
 @media (max-width: 481px) {

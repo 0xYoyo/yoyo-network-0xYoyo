@@ -1,0 +1,92 @@
+.postDetail {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.postDetail button {
+  background-color: #f2eede;
+  border-color: #112d4e;
+}
+
+.postDetailContents {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.postTop,
+.commentTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.postTop button,
+.commentTop button {
+  padding: 0 1rem;
+}
+
+.userDetailPreview {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+}
+.userDetailPreview img {
+  max-height: 50px;
+  border-radius: 10%;
+}
+
+.contentDetailPreview {
+  font-size: 1.2rem;
+  align-self: center;
+  padding-bottom: 12px;
+}
+.contentDetailPreview p {
+  margin: 0;
+}
+
+.postDetailImage {
+  max-height: 250px;
+  border-radius: 5%;
+}
+
+.comments {
+  border-top: 1px solid #3f72af;
+}
+
+.postComments:hover {
+  color: inherit;
+}
+
+.comment {
+  border-bottom: 1px solid #3f72af;
+  padding: 1rem;
+}
+
+#delBtn:hover {
+  color: rgb(240, 87, 87);
+}
+
+@media (max-width: 769px) {
+  .postDetailImage {
+    max-height: 200px;
+  }
+}
+
+@media (max-width: 481px) {
+  .postDetailImage {
+    max-height: 150px;
+  }
+  .postStats button {
+    padding: 0.6rem 1.8rem;
+  }
+}
+
+@media (max-width: 319px) {
+  .postDetailImage {
+    max-height: 100px;
+  }
+}

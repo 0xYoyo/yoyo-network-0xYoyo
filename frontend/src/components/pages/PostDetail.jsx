@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import DetailedPost from "../parts/DetailedPost";
 import { useEffect, useState } from "react";
 import { API_URL } from "../../utils/config";
+import "../../styles/PostDetail.css";
 
 function PostDetail() {
   const { postid } = useParams();

@@ -27,18 +27,20 @@ function Comment({ comment, userId, handleDeleteComment }) {
 
   return (
     <div className="comment">
-      {isCommentAuthor && (
-        <button>
-          <AiOutlineDelete onClick={handleDelete} />
-        </button>
-      )}
-      <Link to={`/profile/${comment.author._id}`}>
-        <div className="userPreview">
-          <img src={comment.author.pfpUrl} alt="pfp" />{" "}
-          {comment.author.displayName}
-        </div>
-      </Link>
-      <div className="contentPreview">
+      <div className="commentTop">
+        <Link to={`/profile/${comment.author._id}`}>
+          <div className="userPreview">
+            <img src={comment.author.pfpUrl} alt="pfp" />{" "}
+            {comment.author.displayName}
+          </div>
+        </Link>
+        {isCommentAuthor && (
+          <button id="delBtn">
+            <AiOutlineDelete onClick={handleDelete} />
+          </button>
+        )}
+      </div>
+      <div className="commentContentPreview">
         <p>{comment.commentContent}</p>
         <p>
           {DateTime.fromISO(comment.timestamp).toLocaleString(

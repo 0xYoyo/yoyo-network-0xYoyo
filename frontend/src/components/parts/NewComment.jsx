@@ -30,22 +30,33 @@ function NewComment({ props }) {
 
   useEffect(() => {
     const dialog = modalRef.current;
-    dialog.showModal();
-    return () => dialog.close();
+    if (!dialog.open) dialog.showModal();
   }, []);
 
   return (
-    <dialog ref={modalRef}>
-      <button onClick={closeNewComment}>X</button>
+    <dialog ref={modalRef} onClose={closeNewComment}>
+      <button onClick={closeNewComment} className="leaveBtn">
+        X
+      </button>
       <form
         action={`${API_URL}/post/${post._id}/comment`}
         method="POST"
         onSubmit={handleSubmit}
       >
-        <h5>New Comment:</h5>
-        <label htmlFor="commentContent">Content:</label>
-        <input type="text" id="commentContent" name="commentContent" required />
-        <button type="submit">Send</button>
+        <ul className="formList">
+          <li>
+            <label htmlFor="commentContent">Content:</label>
+            <textarea
+              type="text"
+              id="commentContent"
+              name="commentContent"
+              required
+            />
+          </li>
+          <li>
+            <button type="submit">Send</button>
+          </li>
+        </ul>
       </form>
       {errors && <p>{errors}</p>}
     </dialog>

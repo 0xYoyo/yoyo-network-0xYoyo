@@ -17,11 +17,11 @@
   border-color: #112d4e;
 }
 
-.posts li {
+.postsItem {
   border-bottom: 1px solid #3f72af;
   padding: 1rem;
 }
-.posts li:hover {
+.postsItem:hover {
   background-color: #ebe8db;
   cursor: pointer;
 }

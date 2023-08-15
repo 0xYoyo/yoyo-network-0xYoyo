@@ -33,7 +33,7 @@ function Nav() {
 
   return (
     <div className="Nav">
-      <ul>
+      <ul id="navList">
         <li className="logoContainer">
           <Link to={"/home"}>
             <img
@@ -61,12 +61,12 @@ function Nav() {
           </Link>
         </li>
         <li>
-          <button onClick={handleNewPost}>
+          <button onClick={handleNewPost} className="navBtn">
             <AiOutlineHighlight className="icon" /> <div>New Post</div>
           </button>
         </li>
         <li className="logout">
-          <button onClick={handleLogout}>
+          <button onClick={handleLogout} className="navBtn">
             <AiOutlineLogout className="icon" /> <div>Log out</div>
           </button>
         </li>

@@ -26,7 +26,7 @@ function Home() {
       <h1>Home</h1>
       <ul className="posts">
         {posts.map((post) => (
-          <li key={post._id}>
+          <li key={post._id} className="postsItem">
             <Post post={post} user={user} />
           </li>
         ))}

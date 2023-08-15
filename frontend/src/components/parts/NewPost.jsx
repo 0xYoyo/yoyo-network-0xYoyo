@@ -3,6 +3,7 @@ import { API_URL } from "../../utils/config";
 import { handleMultiPartForm } from "../../utils/multiPartFormHandler";
 import { PropTypes } from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineCloudUpload } from "react-icons/ai";
 
 function NewPost({ closeNewPost }) {
   const modalRef = useRef(null);
@@ -30,25 +31,42 @@ function NewPost({ closeNewPost }) {
 
   useEffect(() => {
     const dialog = modalRef.current;
-    dialog.showModal();
-    return () => dialog.close();
+    if (!dialog.open) dialog.showModal();
   }, []);
 
   return (
-    <dialog ref={modalRef}>
-      <button onClick={closeNewPost}>X</button>
+    <dialog ref={modalRef} onClose={closeNewPost}>
+      <button onClick={closeNewPost} className="leaveBtn">
+        X
+      </button>
       <form
         action={`${API_URL}/post`}
         encType="multipart/form-data"
         method="POST"
         onSubmit={handleSubmit}
       >
-        <h5>New Post:</h5>
-        <label htmlFor="postContent">Content:</label>
-        <input type="text" id="postContent" name="postContent" required />
-        <label htmlFor="pic">Upload picture:</label>
-        <input type="file" id="pic" name="pic" />
-        <button type="submit">Send</button>
+        <ul className="formList">
+          <li>
+            <label htmlFor="postContent">{`What's on your mind?`}</label>
+            <textarea
+              type="text"
+              id="postContent"
+              name="postContent"
+              required
+            />
+          </li>
+          <li>
+            <label htmlFor="pic">
+              <span className="customFileInput">
+                <AiOutlineCloudUpload className="uploadIcon" /> Upload picture
+              </span>
+            </label>
+            <input type="file" id="pic" name="pic" />
+          </li>
+          <li>
+            <button type="submit">Send</button>
+          </li>
+        </ul>
       </form>
       {errors && <p>{errors}</p>}
     </dialog>

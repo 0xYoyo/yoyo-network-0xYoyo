@@ -103,7 +103,7 @@ function DetailedPost({ post, comments, userId }) {
           <AiOutlineComment /> {postObj.comments.length}
         </button>
       </div>
-      <div className="postComments">
+      <div className="postCommentList">
         <ul className="comments">
           {commentsArr.map((comment) => (
             <li key={comment._id}>

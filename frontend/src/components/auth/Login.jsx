@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { API_URL } from "../../utils/config";
 import { handleAuthForm } from "../../utils/authFormHandler";
 import { setLocalStorage } from "../../utils/authService";
+import "../../styles/Auth.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ function Login() {
   };
 
   return (
-    <div className="PostForm">
+    <div className="AuthForm">
       <h1>Log In</h1>
       <form action={`${API_URL}/login`} method="POST" onSubmit={handleSubmit}>
         <ul>

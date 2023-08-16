@@ -3,6 +3,7 @@ import { useState } from "react";
 import { API_URL } from "../../utils/config";
 import { handleAuthForm } from "../../utils/authFormHandler";
 import { setLocalStorage } from "../../utils/authService";
+import "../../styles/Auth.css";
 
 function Signup() {
   const [errors, setErrors] = useState("");
@@ -34,7 +35,7 @@ function Signup() {
   };
 
   return (
-    <div className="PostForm">
+    <div className="AuthForm">
       <h1>Sign up</h1>
       <form
         action={`${API_URL}/register`}

@@ -3,6 +3,7 @@ import { API_URL } from "../../utils/config";
 import User from "../parts/User";
 import { useParams } from "react-router-dom";
 import "../../styles/Follow.css";
+import NothingYet from "../parts/NothingYet";
 
 function Followers() {
   const { userid } = useParams();
@@ -28,6 +29,7 @@ function Followers() {
   return (
     <div className="FollowPage">
       <h1>Followers</h1>
+      {users.length == 0 && <NothingYet />}
       <ul className="users">
         {users.map((user) => (
           <li key={user._id}>

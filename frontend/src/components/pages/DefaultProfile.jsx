@@ -3,6 +3,7 @@ import { API_URL } from "../../utils/config";
 import DefaultProfileUser from "../parts/DefaultProfileUser";
 import Post from "../parts/Post";
 import "../../styles/Profile.css";
+import NothingYet from "../parts/NothingYet";
 
 function DefaultProfile() {
   const [myUser, setMyUser] = useState({});
@@ -28,6 +29,7 @@ function DefaultProfile() {
     !isLoading && (
       <div className="Profile">
         <DefaultProfileUser myUser={myUser} />
+        {myUser.posts.length == 0 && <NothingYet />}
         <ul className="posts">
           {myUser.posts.map((post) => (
             <li key={post._id}>

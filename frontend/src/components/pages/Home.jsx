@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { API_URL } from "../../utils/config";
 import Post from "../parts/Post";
 import "../../styles/Home.css";
+import NothingYet from "../parts/NothingYet";
+// import { Link } from "react-router-dom";
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -24,6 +26,7 @@ function Home() {
   return (
     <div className="Home">
       <h1>Home</h1>
+      {posts.length == 0 && <NothingYet />}
       <ul className="posts">
         {posts.map((post) => (
           <li key={post._id} className="postsItem">

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { API_URL } from "../../utils/config";
 import User from "../parts/User";
 import "../../styles/Explore.css";
+import NothingYet from "../parts/NothingYet";
 
 function Explore() {
   const [users, setUsers] = useState([]);
@@ -24,6 +25,7 @@ function Explore() {
   return (
     <div className="Explore">
       <h1>Explore</h1>
+      {users.length == 0 && <NothingYet />}
       <ul className="users">
         {users.map((user) => (
           <li key={user._id}>

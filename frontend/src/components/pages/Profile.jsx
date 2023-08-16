@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ProfileUser from "../parts/ProfileUser";
 import Post from "../parts/Post";
 import "../../styles/Profile.css";
+import NothingYet from "../parts/NothingYet";
 
 function Profile() {
   const { userid } = useParams();
@@ -33,6 +34,7 @@ function Profile() {
     !isLoading && (
       <div className="Profile">
         <ProfileUser user={user} myUser={myUser} />
+        {user.posts.length == 0 && <NothingYet />}
         <ul className="posts">
           {user.posts.map((post) => (
             <li key={post._id}>

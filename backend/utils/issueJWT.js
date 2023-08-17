@@ -1,9 +1,9 @@
 const jsonwebtoken = require("jsonwebtoken");
 require("dotenv").config();
 
-const issueJWT = (user) => {
-  const privateKey = process.env.PRIVATE_KEY;
+const privateKey = process.env.PRIVATE_KEY;
 
+const issueJWT = (user) => {
   const _id = user._id;
 
   const expiresIn = "3 w";
@@ -11,7 +11,7 @@ const issueJWT = (user) => {
   const payload = {
     sub: _id,
   };
-
+  console.log(privateKey);
   const signedToken = jsonwebtoken.sign(payload, privateKey, {
     expiresIn: expiresIn,
     algorithm: "RS256",

@@ -11,7 +11,6 @@ const issueJWT = (user) => {
   const payload = {
     sub: _id,
   };
-  console.log(privateKey);
   const signedToken = jsonwebtoken.sign(payload, privateKey, {
     expiresIn: expiresIn,
     algorithm: "RS256",

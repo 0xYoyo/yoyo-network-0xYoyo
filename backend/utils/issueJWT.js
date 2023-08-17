@@ -1,9 +1,9 @@
 const jsonwebtoken = require("jsonwebtoken");
 require("dotenv").config();
 
-const privateKey = process.env.PRIVATE_KEY;
-
 const issueJWT = (user) => {
+  const privateKey = process.env.PRIVATE_KEY;
+
   const _id = user._id;
 
   const expiresIn = "3 w";

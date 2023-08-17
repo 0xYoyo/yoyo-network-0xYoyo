@@ -36,11 +36,7 @@ function Nav() {
       <ul id="navList">
         <li className="logoContainer">
           <Link to={"/home"}>
-            <img
-              src="../../../public/logoyoyo.png"
-              alt="logo"
-              className="logo"
-            />
+            <img src="/logoyoyo.png" alt="logo" className="logo" />
           </Link>
         </li>
         <li>

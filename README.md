@@ -5,8 +5,10 @@ This project was bootstrapped with [React + Vite](https://vitejs.dev/guide/).
 ## Description
 
 The project is a full stack social networking app that allows users end to end experience of a complete social media platform.\
-It is consists of 2 directories, a backend that is built as a RESTful, stateless API.\
-And a frontend which communicates with the API and parse its responses into a well crafted user interface.\
+It is consists of 2 directories:
+
+- A backend that is built as a RESTful, stateless API
+- A frontend which communicates with the API and parse its responses into a well crafted user interface
 
 ## Technologies
 
@@ -14,7 +16,7 @@ And a frontend which communicates with the API and parse its responses into a we
 
 The app's core technologies are Express, NodeJS and MongoDB for the backend.\
 It uses safe user authentication using Passport for the strategy, bcrypt and crypto for encryption and JWTs for persisting user sessions.\
-The app also makes use of Multer and Cloudinary for file uploads and cloud image storage.\
+The app also makes use of Multer and Cloudinary for file uploads and cloud image storage.
 
 ### Frontend
 
@@ -23,7 +25,7 @@ It also features various external libraries such as Prop-types for type checking
 
 ## Key Features
 
-The app fully responsive and contains everything a proper social media app may need.\
+The app fully responsive and contains everything a proper social media app may need.
 
 ### Authentication
 

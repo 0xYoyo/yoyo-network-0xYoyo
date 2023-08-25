@@ -81,3 +81,5 @@ Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
 The page WILL reload when you make changes.\
 You may also see any lint errors in the console.
+
+Image by [Clker-Free-Vector-Images](https://pixabay.com/users/clker-free-vector-images-3736/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=306751) from [Pixabay](https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=306751)
